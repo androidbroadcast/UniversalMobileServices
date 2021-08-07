@@ -32,7 +32,6 @@ class UmsHuaweiMessagingService : HmsMessageService() {
         UmsMessagingManager.notifyTokenError(HMS_PUSH_ID, exception)
     }
 
-
     override fun onTokenError(exception: Exception, data: Bundle?) {
         UmsMessagingManager.notifyTokenError(HMS_PUSH_ID, exception, data)
     }
