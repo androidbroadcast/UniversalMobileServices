@@ -6,6 +6,8 @@ import dev.androidbroadcast.ums.push.RemoteMessage as UmsRemoteMessage
 
 internal class HmsRemoteMessage(private val remoteMessage: RemoteMessage) : UmsRemoteMessage {
 
+    override val pushId = HMS_PUSH_ID
+
     override val collapseKey: String?
         get() = remoteMessage.collapseKey
 

@@ -6,6 +6,11 @@ package dev.androidbroadcast.ums.push
 interface RemoteMessage {
 
     /**
+     * Identifier of push services where the message was received
+     */
+    val pushId: String
+
+    /**
      * The collapse key of the message.
      */
     val collapseKey: String?

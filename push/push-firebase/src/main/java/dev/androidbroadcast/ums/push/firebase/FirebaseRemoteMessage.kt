@@ -6,6 +6,8 @@ import dev.androidbroadcast.ums.push.RemoteMessage as UmsRemoteMessage
 
 internal class FirebaseRemoteMessage(private val remoteMessage: RemoteMessage) : UmsRemoteMessage {
 
+    override val pushId = FIREBASE_PUSH_ID
+
     override val collapseKey: String?
         get() = remoteMessage.collapseKey
 
