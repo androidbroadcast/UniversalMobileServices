@@ -9,4 +9,8 @@ interface PushMessagingService {
     fun unsubscribeFromTopic(topic: String)
 
     var isAutoInitEnabled: Boolean
+
+    suspend fun getToken(): String
+
+    suspend fun deleteToken()
 }

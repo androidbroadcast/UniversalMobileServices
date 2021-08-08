@@ -80,6 +80,11 @@ class UmsMessagingManager private constructor(private val service: PushMessaging
 
     interface Callback {
 
+        /**
+         * Called when a new token for the default project is generated.
+         *
+         * This is invoked after app install when a token is first generated, and again if the token changes.
+         */
         fun onNewToken(pushId: String, token: String, data: Bundle? = null) {}
 
         fun onMessageReceived(pushId: String, message: RemoteMessage) {}
