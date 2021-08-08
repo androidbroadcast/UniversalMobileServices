@@ -8,7 +8,7 @@ import dev.androidbroadcast.ums.push.RemoteMessage
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class HmsMessagingService(
+public class HmsMessagingService(
     context: Context,
     private val appId: String,
     private val tokenScope: String = HmsMessaging.DEFAULT_TOKEN_SCOPE

@@ -1,16 +1,16 @@
 package dev.androidbroadcast.ums.push
 
-interface PushMessagingService {
+public interface PushMessagingService {
 
-    fun send(message: RemoteMessage)
+    public fun send(message: RemoteMessage)
 
-    fun subscribeToTopic(topic: String)
+    public fun subscribeToTopic(topic: String)
 
-    fun unsubscribeFromTopic(topic: String)
+    public fun unsubscribeFromTopic(topic: String)
 
-    var isAutoInitEnabled: Boolean
+    public var isAutoInitEnabled: Boolean
 
-    suspend fun getToken(): String
+    public suspend fun getToken(): String
 
-    suspend fun deleteToken()
+    public suspend fun deleteToken()
 }

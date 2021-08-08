@@ -4,7 +4,7 @@ import androidx.annotation.RestrictTo
 import org.json.JSONObject
 
 @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
-class SimpleRemoteMessage internal constructor(
+public class SimpleRemoteMessage internal constructor(
     override val to: String,
     override val collapseKey: String?,
     data: Map<String, String>,
@@ -13,7 +13,7 @@ class SimpleRemoteMessage internal constructor(
     override val ttl: Int,
 ) : RemoteMessage {
 
-    override val data = data.toMap()
+    override val data: Map<String, String> = data.toMap()
 
     override val rawData: String by lazy {
         JSONObject(data).toString()

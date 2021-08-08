@@ -7,124 +7,124 @@ import androidx.annotation.RestrictTo
 import java.lang.Exception
 import java.util.concurrent.CopyOnWriteArraySet
 
-class UmsMessagingManager private constructor(private val service: PushMessagingService) {
+public class UmsMessagingManager private constructor(private val service: PushMessagingService) {
 
     private val onNewTokenCallbacks = CopyOnWriteArraySet<Callback>()
 
-    fun registerCallback(c: Callback) {
+    public fun registerCallback(c: Callback) {
         onNewTokenCallbacks += c
     }
 
-    fun unregisterCallback(c: Callback) {
+    public fun unregisterCallback(c: Callback) {
         onNewTokenCallbacks -= c
     }
 
-    fun send(message: RemoteMessage) {
+    public fun send(message: RemoteMessage) {
         service.send(message)
     }
 
-    fun subscribeToTopic(topic: String) {
+    public fun subscribeToTopic(topic: String) {
         service.subscribeToTopic(topic)
     }
 
-    fun unsubscribeFromTopic(topic: String) {
+    public fun unsubscribeFromTopic(topic: String) {
         service.unsubscribeFromTopic(topic)
     }
 
-    var isAutoInitEnabled: Boolean
+    public var isAutoInitEnabled: Boolean
         get() = service.isAutoInitEnabled
         set(value) {
             service.isAutoInitEnabled = value
         }
 
     @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
-    fun notifyNewToken(pushId: String, token: String, data: Bundle? = null) {
+    public fun notifyNewToken(pushId: String, token: String, data: Bundle? = null) {
         onNewTokenCallbacks.forEach { callback -> callback.onNewToken(pushId, token, data) }
     }
 
     @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
-    fun notifyMessageReceived(pushId: String, message: RemoteMessage) {
+    public fun notifyMessageReceived(pushId: String, message: RemoteMessage) {
         onNewTokenCallbacks.forEach { callback -> callback.onMessageReceived(pushId, message) }
     }
 
     @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
-    fun notifyMessageSent(pushId: String, message: String) {
+    public fun notifyMessageSent(pushId: String, message: String) {
         onNewTokenCallbacks.forEach { callback -> callback.onMessageSent(pushId, message) }
     }
 
     @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
-    fun notifySentError(pushId: String, msgId: String, exception: Exception) {
+    public fun notifySentError(pushId: String, msgId: String, exception: Exception) {
         onNewTokenCallbacks.forEach { callback -> callback.onSentError(pushId, msgId, exception) }
     }
 
     @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
-    fun notifyMessageDelivered(pushId: String, msgId: String, exception: Exception?) {
+    public fun notifyMessageDelivered(pushId: String, msgId: String, exception: Exception?) {
         onNewTokenCallbacks.forEach { callback ->
             callback.onMessageDelivered(pushId, msgId, exception)
         }
     }
 
     @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
-    fun notifyTokenError(pushId: String, exception: Exception, data: Bundle? = null) {
+    public fun notifyTokenError(pushId: String, exception: Exception, data: Bundle? = null) {
         onNewTokenCallbacks.forEach { callback ->
             callback.onTokenError(pushId, exception, data)
         }
     }
 
     @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
-    fun notifyDeletedMessages(pushId: String) {
+    public fun notifyDeletedMessages(pushId: String) {
         onNewTokenCallbacks.forEach { callback ->
             callback.onDeletedMessages(pushId)
         }
     }
 
-    interface Callback {
+    public interface Callback {
 
         /**
          * Called when a new token for the default project is generated.
          *
          * This is invoked after app install when a token is first generated, and again if the token changes.
          */
-        fun onNewToken(pushId: String, token: String, data: Bundle? = null) {}
+        public fun onNewToken(pushId: String, token: String, data: Bundle? = null) {}
 
-        fun onMessageReceived(pushId: String, message: RemoteMessage) {}
+        public fun onMessageReceived(pushId: String, message: RemoteMessage) {}
 
-        fun onMessageSent(pushId: String, message: String) {}
+        public fun onMessageSent(pushId: String, message: String) {}
 
-        fun onSentError(pushId: String, msgId: String, exception: Exception) {}
-
-        /**
-         * Only for HMS Push
-         */
-        fun onMessageDelivered(pushId: String, msgId: String, exception: Exception?) {}
+        public fun onSentError(pushId: String, msgId: String, exception: Exception) {}
 
         /**
          * Only for HMS Push
          */
-        fun onTokenError(pushId: String, exception: Exception, data: Bundle? = null) {}
+        public fun onMessageDelivered(pushId: String, msgId: String, exception: Exception?) {}
+
+        /**
+         * Only for HMS Push
+         */
+        public fun onTokenError(pushId: String, exception: Exception, data: Bundle? = null) {}
 
         /**
          * Only for Firebase Push
          */
-        fun onDeletedMessages(pushId: String) {}
+        public fun onDeletedMessages(pushId: String) {}
     }
 
-    companion object {
+    public companion object {
 
         @Suppress("ObjectPropertyName")
         @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
         @get:JvmName("instance")
-        var _instance: UmsMessagingManager? = null
+        public var _instance: UmsMessagingManager? = null
             private set
 
-        fun init(service: PushMessagingService) {
+        public fun init(service: PushMessagingService) {
             if (_instance != null) {
                 error("UmsMessagingManager has been already initialized")
             }
             _instance = UmsMessagingManager(service)
         }
 
-        fun getInstance(): UmsMessagingManager {
+        public fun getInstance(): UmsMessagingManager {
             return checkNotNull(_instance) { "UmsMessagingManager isn't initialized" }
         }
     }

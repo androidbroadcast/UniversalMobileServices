@@ -4,7 +4,7 @@ import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import dev.androidbroadcast.ums.push.UmsMessagingManager
 
-class UmsFirebaseMessagingService : FirebaseMessagingService() {
+public class UmsFirebaseMessagingService : FirebaseMessagingService() {
 
     override fun onNewToken(token: String) {
         UmsMessagingManager._instance?.notifyNewToken(FIREBASE_PUSH_ID, token)

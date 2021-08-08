@@ -7,7 +7,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 
-class FirebaseMessagingService : PushMessagingService {
+public class FirebaseMessagingService : PushMessagingService {
 
     private val messaging = FirebaseMessaging.getInstance()
 

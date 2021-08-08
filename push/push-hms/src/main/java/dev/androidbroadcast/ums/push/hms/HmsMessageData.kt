@@ -4,8 +4,8 @@ package dev.androidbroadcast.ums.push.hms
 
 import com.huawei.hms.push.HmsMessageService
 
-object HmsMessageData {
+public object HmsMessageData {
 
-    const val SUBJECT_ID = HmsMessageService.SUBJECT_ID
-    const val PROXY_TYPE = HmsMessageService.PROXY_TYPE
+    public const val SUBJECT_ID: String = HmsMessageService.SUBJECT_ID
+    public const val PROXY_TYPE: String = HmsMessageService.PROXY_TYPE
 }
