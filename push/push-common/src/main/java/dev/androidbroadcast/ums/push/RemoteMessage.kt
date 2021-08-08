@@ -1,5 +1,7 @@
 package dev.androidbroadcast.ums.push
 
+import androidx.annotation.IntRange
+
 /**
  * Representation of message from a Push Service.
  */
@@ -8,7 +10,8 @@ interface RemoteMessage {
     /**
      * Identifier of push services where the message was received
      */
-    val pushId: String
+    val pushId: String?
+        get() = null
 
     /**
      * The collapse key of the message.
@@ -79,7 +82,7 @@ interface RemoteMessage {
     /**
      * Return original message from Push Services
      */
-    fun asVendorMessage(): Any
+    fun asVendorMessage(): Any?
 
 
     //    val notification: Notification
@@ -91,5 +94,63 @@ interface RemoteMessage {
         const val PRIORITY_HIGH = 1
         const val PRIORITY_NORMAL = 2
         const val PRIORITY_UNKNOWN = 0
+    }
+
+    class Builder(private val to: String) {
+
+        private var collapseKey: String? = null
+        private var data = mutableMapOf<String, String>()
+        private var messageId: String? = null
+        private var messageType: String? = null
+        private var ttl: Int = -1
+
+        fun collapseKey(collapseKey: String?): Builder {
+            this.collapseKey = collapseKey
+            return this
+        }
+
+        fun data(data: Map<String, String>): Builder {
+            this.data.apply {
+                clear()
+                putAll(data)
+            }
+            return this
+        }
+
+        fun addData(key: String, value: String): Builder {
+            this.data[key] = value
+            return this
+        }
+
+        fun clear(): Builder {
+            this.data.clear()
+            return this
+        }
+
+        fun messageId(messageId: String): Builder {
+            this.messageId = messageId
+            return this
+        }
+
+        fun messageType(messageType: String): Builder {
+            this.messageType = messageType
+            return this
+        }
+
+        fun ttl(@IntRange(from = 0) ttl: Int): Builder {
+            this.ttl = ttl
+            return this
+        }
+
+        fun build(): RemoteMessage {
+            return SimpleRemoteMessage(
+                to,
+                collapseKey,
+                data,
+                messageId,
+                messageType,
+                ttl
+            )
+        }
     }
 }

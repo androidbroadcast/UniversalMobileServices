@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package dev.androidbroadcast.ums.push.hms
 
 import com.huawei.hms.push.HmsMessageService

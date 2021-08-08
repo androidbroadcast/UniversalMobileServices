@@ -7,7 +7,7 @@ import androidx.annotation.RestrictTo
 import java.lang.Exception
 import java.util.concurrent.CopyOnWriteArraySet
 
-object UmsMessagingManager {
+class UmsMessagingManager private constructor(private val service: PushMessagingService) {
 
     private val onNewTokenCallbacks = CopyOnWriteArraySet<Callback>()
 
@@ -18,6 +18,24 @@ object UmsMessagingManager {
     fun unregisterCallback(c: Callback) {
         onNewTokenCallbacks -= c
     }
+
+    fun send(message: RemoteMessage) {
+        service.send(message)
+    }
+
+    fun subscribeToTopic(topic: String) {
+        service.subscribeToTopic(topic)
+    }
+
+    fun unsubscribeFromTopic(topic: String) {
+        service.unsubscribeFromTopic(topic)
+    }
+
+    var isAutoInitEnabled: Boolean
+        get() = service.isAutoInitEnabled
+        set(value) {
+            service.isAutoInitEnabled = value
+        }
 
     @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
     fun notifyNewToken(pushId: String, token: String, data: Bundle? = null) {
@@ -84,5 +102,25 @@ object UmsMessagingManager {
          * Only for Firebase Push
          */
         fun onDeletedMessages(pushId: String) {}
+    }
+
+    companion object {
+
+        @Suppress("ObjectPropertyName")
+        @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
+        @get:JvmName("instance")
+        var _instance: UmsMessagingManager? = null
+            private set
+
+        fun init(service: PushMessagingService) {
+            if (_instance != null) {
+                error("UmsMessagingManager has been already initialized")
+            }
+            _instance = UmsMessagingManager(service)
+        }
+
+        fun getInstance(): UmsMessagingManager {
+            return checkNotNull(_instance) { "UmsMessagingManager isn't initialized" }
+        }
     }
 }
