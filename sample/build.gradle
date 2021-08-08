@@ -48,5 +48,8 @@ dependencies {
     kapt 'com.google.dagger:dagger-compiler:2.38.1'
 
     googleImplementation project(':push:push-firebase')
+    googleImplementation project(':analytics:analytics-firebase')
+
     huaweiImplementation project(':push:push-hms')
+    huaweiImplementation project(':analytics:analytics-hms')
 }
