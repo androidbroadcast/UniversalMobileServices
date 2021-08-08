@@ -12,7 +12,7 @@ public class UmsApiAvailability {
 
     public fun getAvailableServices(context: Context): List<String> {
         return apiAvailabilityServices
-            .filter { it.isServicesAvailable(context) }
+            .filter { it.isServicesAvailable(context) == ConnectionResult.SUCCESS }
             .map { it.serviceId }
     }
 

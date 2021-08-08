@@ -13,9 +13,11 @@ public interface ApiAvailabilityServices {
     public val serviceId: String
 
     /**
-     * Check is services present on device. Maybe require update, or isn't working, but exists
+     * Check is services present on device
      */
-    public fun isServicesAvailable(context: Context): Boolean
+    public fun isServicesAvailable(context: Context): Int
+
+    public fun isServicesAvailable(context: Context, minApkVersion: Int): Int
 
     /**
      * Package name of store with what the services is connected. As example,
@@ -24,4 +26,11 @@ public interface ApiAvailabilityServices {
      * Can be null in case when services are independent of any app store.
      */
     public val storePackageName: String?
+}
+
+/**
+ * Check is services present on device. Maybe require update, or isn't working, but exists
+ */
+public fun ApiAvailabilityServices.isServicesReady(context: Context): Boolean {
+    return isServicesAvailable(context) == ConnectionResult.SUCCESS
 }
