@@ -11,9 +11,9 @@ internal fun UmsRemoteMessage.asFirebaseRemoteMessage(): RemoteMessage = when (t
     is FirebaseRemoteMessage -> asVendorMessage() as RemoteMessage
     else -> {
         val builder = RemoteMessage.Builder(requireNotNull(to))
-        builder.setCollapseKey(collapseKey)
-            .setData(data)
-            .setMessageType(messageType)
+        builder.setData(data)
+        collapseKey?.let(builder::setCollapseKey)
+        messageType?.let(builder::setMessageType)
         messageId?.let(builder::setMessageId)
         if (ttl > 0) builder.setTtl(ttl)
         builder.build()

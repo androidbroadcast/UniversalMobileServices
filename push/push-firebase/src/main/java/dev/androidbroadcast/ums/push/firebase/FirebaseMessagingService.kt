@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package dev.androidbroadcast.ums.push.firebase
 
 import com.google.firebase.messaging.FirebaseMessaging

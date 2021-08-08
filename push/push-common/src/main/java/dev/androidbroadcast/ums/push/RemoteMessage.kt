@@ -1,6 +1,10 @@
+@file:Suppress("unused")
+
 package dev.androidbroadcast.ums.push
 
 import androidx.annotation.IntRange
+import kotlin.time.Duration
+import kotlin.time.ExperimentalTime
 
 /**
  * Representation of message from a Push Service.
@@ -153,4 +157,9 @@ public interface RemoteMessage {
             )
         }
     }
+}
+
+@OptIn(ExperimentalTime::class)
+public fun RemoteMessage.Builder.ttl(ttl: Duration): RemoteMessage.Builder {
+    return ttl(ttl.inWholeSeconds.toInt())
 }
