@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "649759596647",
+    "project_id": "universal-mobile-services",
+    "storage_bucket": "universal-mobile-services.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:649759596647:android:7d0fa21a2ef720716b74c2",
+        "android_client_info": {
+          "package_name": "dev.androidbroadcast.ums"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "649759596647-ef4kb26vjlkl572aq53l3epnf7q11atf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCpwes3kyVTfhoKPwBDyCIda43PfRJG0N0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "649759596647-ef4kb26vjlkl572aq53l3epnf7q11atf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

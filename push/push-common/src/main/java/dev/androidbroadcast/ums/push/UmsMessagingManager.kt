@@ -124,6 +124,9 @@ public class UmsMessagingManager private constructor(private val service: PushMe
             _instance = UmsMessagingManager(service)
         }
 
+        public val isInitialized: Boolean
+            get() = _instance != null
+
         public fun getInstance(): UmsMessagingManager {
             return checkNotNull(_instance) { "UmsMessagingManager isn't initialized" }
         }
