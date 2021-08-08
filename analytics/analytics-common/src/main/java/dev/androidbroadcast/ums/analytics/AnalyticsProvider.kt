@@ -7,7 +7,7 @@ import kotlin.time.ExperimentalTime
 
 public interface AnalyticsProvider {
 
-    public fun logEvent(name: String, params: Bundle)
+    public fun logEvent(name: String, params: Map<String, Any>)
 
     public fun setUserId(userId: String?)
 

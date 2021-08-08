@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package dev.androidbroadcast.ums.analytics
 
 import android.os.Bundle
@@ -5,7 +7,7 @@ import androidx.annotation.IntRange
 
 public class Analytics private constructor(private val analyticsProvider: AnalyticsProvider) {
 
-    public fun logEvent(key: String, params: Bundle) {
+    public fun logEvent(key: String, params: Map<String, Any>) {
         analyticsProvider.logEvent(key, params)
     }
 
@@ -40,4 +42,20 @@ public class Analytics private constructor(private val analyticsProvider: Analyt
             return Analytics(provider)
         }
     }
+}
+
+public fun Analytics.logEvent(key: String, params: Bundle) {
+    logEvent(key, params.asParamMap())
+}
+
+private fun Bundle.asParamMap(): Map<String, Any> {
+    if (isEmpty) {
+        return emptyMap()
+    }
+
+    val map = HashMap<String, Any>(size())
+    keySet().forEach { key ->
+        map[key] = requireNotNull(this.get(key)) { "Pram for key '$key' is null" }
+    }
+    return map
 }

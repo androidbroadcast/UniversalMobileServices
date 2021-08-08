@@ -32,5 +32,5 @@ android {
 dependencies {
     api project(":analytics:analytics-common")
     implementation platform('com.google.firebase:firebase-bom:28.3.0')
-    implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.firebase:firebase-analytics-ktx'
 }
