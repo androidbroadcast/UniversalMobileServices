@@ -5,9 +5,9 @@ package dev.androidbroadcast.ums.analytics.firebase
 import android.content.Context
 import android.os.Bundle
 import com.google.firebase.analytics.FirebaseAnalytics
-import dev.androidbroadcast.ums.analytics.AnalyticsProvider
+import dev.androidbroadcast.ums.analytics.Analytics
 
-public class FirebaseAnalyticsProvider(context: Context) : AnalyticsProvider {
+public class GoogleAnalytics(context: Context) : Analytics {
 
     private val analytics: FirebaseAnalytics = FirebaseAnalytics.getInstance(context)
 

@@ -8,10 +8,10 @@ import com.huawei.hms.analytics.HiAnalytics
 import com.huawei.hms.analytics.HiAnalyticsInstance
 import com.huawei.hms.analytics.type.HAEventType
 import com.huawei.hms.analytics.type.HAParamType
-import dev.androidbroadcast.ums.analytics.AnalyticsProvider
+import dev.androidbroadcast.ums.analytics.Analytics
 import dev.androidbroadcast.ums.analytics.Events
 
-public class HmsAnalyticsProvider(context: Context) : AnalyticsProvider {
+public class HmsAnalytics(context: Context) : Analytics {
 
     private val analytics: HiAnalyticsInstance = HiAnalytics.getInstance(context)
 
@@ -187,9 +187,7 @@ private fun addMandatoryParams(hmsEventName: String, params: Map<String, Any>): 
 }
 
 private fun Map<String, Any>.asHmsParams(): Bundle {
-    if (isEmpty()) {
-        return Bundle.EMPTY
-    }
+    if (isEmpty()) return Bundle.EMPTY
 
     val bundle = Bundle(size)
     forEach { (key, value) ->

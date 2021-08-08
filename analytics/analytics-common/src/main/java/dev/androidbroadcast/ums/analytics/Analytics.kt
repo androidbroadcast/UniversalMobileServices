@@ -1,47 +1,30 @@
-@file:Suppress("unused")
-
 package dev.androidbroadcast.ums.analytics
 
 import android.os.Bundle
 import androidx.annotation.IntRange
+import kotlin.time.Duration
+import kotlin.time.ExperimentalTime
 
-public class Analytics private constructor(private val analyticsProvider: AnalyticsProvider) {
+public interface Analytics {
 
-    public fun logEvent(key: String, params: Map<String, Any>) {
-        analyticsProvider.logEvent(key, params)
-    }
+    public fun logEvent(name: String, params: Map<String, Any>)
 
-    public fun setUserId(userId: String) {
-        analyticsProvider.setUserId(userId)
-    }
+    public fun setUserId(userId: String?)
 
-    public fun setUserProperty(name: String, value: String) {
-        analyticsProvider.setUserProperty(name, value)
-    }
+    public fun setUserProperty(name: String, value: String?)
 
-    public fun setSessionTimeoutDuration(@IntRange(from = 0) milliseconds: Long) {
-        analyticsProvider.setSessionTimeoutDuration(milliseconds)
-    }
+    public fun setSessionTimeoutDuration(@IntRange(from = 0) milliseconds: Long)
 
-    public fun setDefaultEventParameters(params: Bundle) {
-        analyticsProvider.setDefaultEventParameters(params)
-    }
+    public fun setDefaultEventParameters(params: Bundle)
 
-    public fun setAnalyticsCollectionEnabled(enabled: Boolean) {
-        analyticsProvider.setAnalyticsCollectionEnabled(enabled)
-    }
+    public fun setAnalyticsCollectionEnabled(enabled: Boolean)
 
-    public fun resetAnalyticsData() {
-        analyticsProvider.resetAnalyticsData()
-    }
+    public fun resetAnalyticsData()
+}
 
-    public companion object {
-
-        @JvmStatic
-        public fun newInstance(provider: AnalyticsProvider): Analytics {
-            return Analytics(provider)
-        }
-    }
+@OptIn(ExperimentalTime::class)
+public fun Analytics.setSessionTimeoutDuration(timeout: Duration) {
+    return setSessionTimeoutDuration(timeout.inWholeMilliseconds)
 }
 
 public fun Analytics.logEvent(key: String, params: Bundle) {
@@ -49,13 +32,11 @@ public fun Analytics.logEvent(key: String, params: Bundle) {
 }
 
 private fun Bundle.asParamMap(): Map<String, Any> {
-    if (isEmpty) {
-        return emptyMap()
-    }
+    if (isEmpty) return emptyMap()
 
     val map = HashMap<String, Any>(size())
     keySet().forEach { key ->
-        map[key] = requireNotNull(this.get(key)) { "Pram for key '$key' is null" }
+        map[key] = requireNotNull(this.get(key)) { "Param for key '$key' is null" }
     }
     return map
 }
