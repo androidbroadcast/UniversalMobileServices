@@ -1,7 +1,9 @@
 package dev.androidbroadcast.ums.analytics
 
+import android.content.Context
 import android.os.Bundle
 import androidx.annotation.IntRange
+import java.util.ServiceLoader
 import kotlin.time.Duration
 import kotlin.time.ExperimentalTime
 
@@ -20,6 +22,26 @@ public interface Analytics {
     public fun setAnalyticsCollectionEnabled(enabled: Boolean)
 
     public fun resetAnalyticsData()
+
+    public companion object {
+
+        @JvmStatic
+        public fun getDefault(context: Context): Analytics {
+            val serviceLoader: ServiceLoader<AnalyticsFactory> = ServiceLoader.load(AnalyticsFactory::class.java)
+            val analyticsFactory = checkNotNull(serviceLoader.firstOrNull()) {
+                "Not analytics implementation connected"
+            }
+            return analyticsFactory.create(context)
+        }
+
+        @JvmStatic
+        public fun getAll(context: Context): List<Analytics> {
+            val serviceLoader = ServiceLoader.load(AnalyticsFactory::class.java)
+            return serviceLoader.map { factory ->
+                factory.create(context)
+            }
+        }
+    }
 }
 
 @OptIn(ExperimentalTime::class)

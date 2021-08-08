@@ -11,12 +11,12 @@ android {
         targetSdk 30
         versionCode 1
         versionName "1.0"
-
-        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
-        release
+        release {
+            minifyEnabled false
+        }
     }
 
     compileOptions {
@@ -30,7 +30,6 @@ android {
 }
 
 dependencies {
-    api project(":analytics:analytics-common")
-    implementation project(":core:core-hms")
-    implementation 'com.huawei.hms:hianalytics:6.1.0.300'
+    implementation project(':core:core-common')
+    implementation 'com.huawei.hms:base:6.0.0.300'
 }

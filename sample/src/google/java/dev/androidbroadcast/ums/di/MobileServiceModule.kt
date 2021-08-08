@@ -4,7 +4,8 @@ import android.app.Application
 import dagger.Module
 import dagger.Provides
 import dev.androidbroadcast.ums.analytics.Analytics
-import dev.androidbroadcast.ums.analytics.firebase.FirebaseAnalyticsProvider
+import dev.androidbroadcast.ums.analytics.firebase.GoogleAnalytics
+
 import dev.androidbroadcast.ums.push.UmsMessagingManager
 import dev.androidbroadcast.ums.push.firebase.FirebaseMessagingService
 import javax.inject.Singleton
@@ -14,7 +15,7 @@ class MobileServiceModule {
 
     @Provides
     @Singleton
-    fun providePushManager(application: Application): UmsMessagingManager {
+    fun providePushManager(): UmsMessagingManager {
         if(!UmsMessagingManager.isInitialized) {
             UmsMessagingManager.init(FirebaseMessagingService())
         }
@@ -24,6 +25,6 @@ class MobileServiceModule {
     @Provides
     @Singleton
     fun provideAnalytics(application: Application): Analytics {
-        return Analytics.newInstance(FirebaseAnalyticsProvider(application))
+        return GoogleAnalytics(application)
     }
 }

@@ -33,5 +33,6 @@ android {
 
 dependencies {
     api project(":push:push-common")
+    implementation project(":core:core-hms")
     implementation 'com.huawei.hms:push:5.3.0.304'
 }

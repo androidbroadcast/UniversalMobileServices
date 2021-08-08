@@ -12,6 +12,6 @@ rootProject.name = "Universal Mobile Services"
 
 include ':sample'
 include ':push:push-common', ':push:push-firebase', ':push:push-hms'
-include ':analytics:analytics-common'
-include ':analytics:analytics-hms'
-include ':analytics:analytics-firebase'
+include ':analytics:analytics-common', ':analytics:analytics-hms', ':analytics:analytics-firebase'
+include ':core:core-common', ':core:core-gms', ':core:core-hms'
+include ':utils'
