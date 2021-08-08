@@ -1,6 +1,6 @@
 @file:JvmName("Utils")
 
-package dev.androidbroadcast.ums.push.firebase
+package dev.androidbroadcast.ums.push.gms
 
 import com.google.firebase.messaging.RemoteMessage
 import dev.androidbroadcast.ums.push.RemoteMessage as UmsRemoteMessage

@@ -4,10 +4,10 @@ import android.app.Application
 import dagger.Module
 import dagger.Provides
 import dev.androidbroadcast.ums.analytics.Analytics
-import dev.androidbroadcast.ums.analytics.firebase.GoogleAnalytics
+import dev.androidbroadcast.ums.analytics.gms.GoogleAnalytics
 
 import dev.androidbroadcast.ums.push.UmsMessagingManager
-import dev.androidbroadcast.ums.push.firebase.FirebaseMessagingService
+import dev.androidbroadcast.ums.push.gms.FirebaseMessagingService
 import javax.inject.Singleton
 
 @Module

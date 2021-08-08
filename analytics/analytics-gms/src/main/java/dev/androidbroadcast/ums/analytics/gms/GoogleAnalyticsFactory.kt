@@ -1,4 +1,4 @@
-package dev.androidbroadcast.ums.analytics.firebase
+package dev.androidbroadcast.ums.analytics.gms
 
 import android.content.Context
 import dev.androidbroadcast.ums.analytics.AnalyticsFactory

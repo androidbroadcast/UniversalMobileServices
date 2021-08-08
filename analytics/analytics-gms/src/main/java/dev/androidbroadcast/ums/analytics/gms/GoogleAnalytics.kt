@@ -1,6 +1,6 @@
 @file:Suppress("unused")
 
-package dev.androidbroadcast.ums.analytics.firebase
+package dev.androidbroadcast.ums.analytics.gms
 
 import android.content.Context
 import android.os.Bundle
