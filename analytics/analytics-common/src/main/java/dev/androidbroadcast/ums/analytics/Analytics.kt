@@ -3,6 +3,8 @@ package dev.androidbroadcast.ums.analytics
 import android.content.Context
 import android.os.Bundle
 import androidx.annotation.IntRange
+import dev.androidbroadcast.ums.core.UmsApiAvailability
+import dev.androidbroadcast.ums.utils.loadServices
 import java.util.ServiceLoader
 import kotlin.time.Duration
 import kotlin.time.ExperimentalTime
@@ -27,9 +29,14 @@ public interface Analytics {
 
         @JvmStatic
         public fun getDefault(context: Context): Analytics {
-            val serviceLoader: ServiceLoader<AnalyticsFactory> = ServiceLoader.load(AnalyticsFactory::class.java)
-            val analyticsFactory = checkNotNull(serviceLoader.firstOrNull()) {
-                "Not analytics implementation connected"
+            val serviceLoader: ServiceLoader<AnalyticsFactory> = loadServices()
+            val currentServicesId = checkNotNull(UmsApiAvailability(context).currentServicesId) {
+                "Mobile services isn't initialized"
+            }
+            val analyticsFactory = checkNotNull(
+                serviceLoader.firstOrNull { it.servicesId == currentServicesId }
+            ) {
+                "No analytics implementation for services '$currentServicesId'"
             }
             return analyticsFactory.create(context)
         }

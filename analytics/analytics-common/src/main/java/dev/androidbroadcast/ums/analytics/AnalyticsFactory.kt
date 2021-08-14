@@ -7,5 +7,7 @@ import android.content.Context
  */
 public interface AnalyticsFactory {
 
+    public val servicesId: String
+
     public fun create(context: Context): Analytics
 }

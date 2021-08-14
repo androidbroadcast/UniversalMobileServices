@@ -2,9 +2,13 @@
 
 package dev.androidbroadcast.ums.push
 
+import android.content.Context
 import android.os.Bundle
 import androidx.annotation.RestrictTo
+import dev.androidbroadcast.ums.core.UmsApiAvailability
+import dev.androidbroadcast.ums.utils.loadServices
 import java.lang.Exception
+import java.util.ServiceLoader
 import java.util.concurrent.CopyOnWriteArraySet
 
 public class UmsMessagingManager private constructor(private val service: PushMessagingService) {
@@ -122,6 +126,23 @@ public class UmsMessagingManager private constructor(private val service: PushMe
                 error("UmsMessagingManager has been already initialized")
             }
             _instance = UmsMessagingManager(service)
+        }
+
+        @JvmStatic
+        public fun initWithDefault(
+            context: Context,
+            appId: String? = null,
+            tokenScope: String? = null
+        ) {
+            val serviceLoader: ServiceLoader<PushMessagingServiceFactory> = loadServices()
+            val currentServices = UmsApiAvailability(context).currentServicesId
+            val pushMessagingServiceFactory = checkNotNull(
+                serviceLoader.firstOrNull { it.servicesId == currentServices }
+            ) {
+                "Not push messaging services for services '$currentServices'"
+            }
+            _instance =
+                UmsMessagingManager(pushMessagingServiceFactory.create(context, appId, tokenScope))
         }
 
         public val isInitialized: Boolean

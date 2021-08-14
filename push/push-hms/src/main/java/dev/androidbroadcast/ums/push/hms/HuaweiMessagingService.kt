@@ -6,7 +6,7 @@ import com.huawei.hms.push.RemoteMessage
 import dev.androidbroadcast.ums.push.UmsMessagingManager
 import java.lang.Exception
 
-public class UmsHuaweiMessagingService : HmsMessageService() {
+public class HuaweiMessagingService : HmsMessageService() {
 
     override fun onNewToken(token: String) {
         UmsMessagingManager._instance?.notifyNewToken(HMS_PUSH_ID, token)

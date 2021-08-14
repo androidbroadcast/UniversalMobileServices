@@ -23,6 +23,10 @@ class UmsSampleApp : Application() {
         Log.d(TAG, "availableServices=$availableServices")
         val preferredServices = apiAvailability.getPreferredServicesIdOrFirstAvailable()
         Log.d(TAG, "preferredServices=$preferredServices")
+        val analytics = appComponent.analytics
+        Log.d(TAG, "analytics=$analytics")
+        val umsMessagingManager = appComponent.umsMessagingManager
+        Log.d(TAG, "umsMessagingManager=$umsMessagingManager")
     }
 
     private companion object {

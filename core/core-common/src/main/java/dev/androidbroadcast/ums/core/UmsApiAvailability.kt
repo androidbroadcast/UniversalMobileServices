@@ -1,3 +1,5 @@
+@file:Suppress("MemberVisibilityCanBePrivate")
+
 package dev.androidbroadcast.ums.core
 
 import android.content.Context
@@ -9,6 +11,9 @@ public class UmsApiAvailability(internal val context: Context) {
     private val apiAvailabilityServices: List<ApiAvailabilityServices> by lazy {
         loadServices<ApiAvailabilityServices>().toList()
     }
+
+    public var currentServicesId: String? = getPreferredServicesId()
+        private set
 
     public fun getAvailableServices(): List<ApiAvailabilityServices.ServicesInfo> {
         return apiAvailabilityServices
@@ -23,10 +28,18 @@ public class UmsApiAvailability(internal val context: Context) {
 
     @Suppress("MemberVisibilityCanBePrivate")
     public fun getPreferredServices(): ApiAvailabilityServices.ServicesInfo? {
-        val installerPackageName = getInstallerPackageName(context) ?: return null
+        val installerPackageName = getInstallerPackageName(context)
         val apiAvailabilityServices = getAvailableServices()
-        return apiAvailabilityServices
-            .find { service -> service.storePackageName == installerPackageName }
+        if (installerPackageName != null) {
+            return apiAvailabilityServices
+                .find { service -> service.storePackageName == installerPackageName }
+        }
+
+        if (apiAvailabilityServices.isNotEmpty()) {
+            return apiAvailabilityServices[0]
+        }
+
+        return null
     }
 }
 
