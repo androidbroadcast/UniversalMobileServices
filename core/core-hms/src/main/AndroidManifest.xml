@@ -1,2 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="dev.androidbroadcast.ums.core.hms" />
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    package="dev.androidbroadcast.ums.core.hms"
+    >
+
+    <queries>
+        <package android:name="com.huawei.appmarket" />
+    </queries>
+</manifest>
