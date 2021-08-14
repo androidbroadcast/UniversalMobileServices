@@ -34,4 +34,5 @@ android {
 dependencies {
     implementation 'androidx.annotation:annotation:1.2.0'
     api 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1'
+    api project(':core:core-common')
 }

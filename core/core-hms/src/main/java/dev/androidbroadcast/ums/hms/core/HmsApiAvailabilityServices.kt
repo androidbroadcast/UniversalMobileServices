@@ -8,7 +8,7 @@ import dev.androidbroadcast.ums.core.ConnectionResult as UmsConnectionResult
 
 internal class HmsApiAvailabilityServices : ApiAvailabilityServices {
 
-    override val serviceId: String = HMS_ID
+    override val servicesInfo = HmsServicesInfo
 
     override fun isServicesAvailable(context: Context): Int {
         val apiAvailability = HuaweiApiAvailability.getInstance()
@@ -21,13 +21,14 @@ internal class HmsApiAvailabilityServices : ApiAvailabilityServices {
             apiAvailability.isHuaweiMobileServicesAvailable(context, minApkVersion)
         )
     }
-
-    override val storePackageName = APPGALLERY_PACKAGE
 }
 
 @Suppress("SpellCheckingInspection")
-private const val APPGALLERY_PACKAGE = "com.huawei.appmarket"
+public const val APPGALLERY_PACKAGE: String = "com.huawei.appmarket"
 public const val HMS_ID: String = "dev.androidbroadcast.ums.hms"
+
+public val HmsServicesInfo: ApiAvailabilityServices.ServicesInfo =
+    ApiAvailabilityServices.ServicesInfo(HMS_ID, APPGALLERY_PACKAGE)
 
 private fun mapConnectionResult(result: Int): Int = when (result) {
     ConnectionResult.SUCCESS -> UmsConnectionResult.SUCCESS

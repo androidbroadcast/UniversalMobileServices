@@ -8,7 +8,7 @@ import dev.androidbroadcast.ums.core.ApiAvailabilityServices
 
 internal class GooglePlayApiAvailabilityServices : ApiAvailabilityServices {
 
-    override val serviceId: String = GMS_ID
+    override val servicesInfo = GmsServicesInfo
 
     override fun isServicesAvailable(context: Context): Int {
         val apiAvailability = GoogleApiAvailability.getInstance()
@@ -21,12 +21,13 @@ internal class GooglePlayApiAvailabilityServices : ApiAvailabilityServices {
             apiAvailability.isGooglePlayServicesAvailable(context, minApkVersion)
         )
     }
-
-    override val storePackageName = GOOGLE_PLAY_PACKAGE
 }
 
-private const val GOOGLE_PLAY_PACKAGE = "com.android.vending"
 public const val GMS_ID: String = "dev.androidbroadcast.ums.gms"
+public const val GOOGLE_PLAY_PACKAGE: String = "com.android.vending"
+
+public val GmsServicesInfo: ApiAvailabilityServices.ServicesInfo =
+    ApiAvailabilityServices.ServicesInfo(GMS_ID, GOOGLE_PLAY_PACKAGE)
 
 private fun mapConnectionResult(result: Int): Int = when (result) {
     ConnectionResult.SUCCESS -> UmsConnectionResult.SUCCESS

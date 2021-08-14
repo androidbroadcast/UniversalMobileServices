@@ -37,6 +37,12 @@ android {
             dimension "mobileServices"
         }
     }
+    buildFeatures {
+        viewBinding true
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
 }
 
 dependencies {
@@ -45,11 +51,16 @@ dependencies {
     implementation 'com.google.android.material:material:1.4.0'
 
     implementation 'com.google.dagger:dagger:2.38.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.0'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
     kapt 'com.google.dagger:dagger-compiler:2.38.1'
 
     googleImplementation project(':push:push-gms')
     googleImplementation project(':analytics:analytics-gms')
+    googleImplementation project(':core:core-gms')
 
     huaweiImplementation project(':push:push-hms')
     huaweiImplementation project(':analytics:analytics-hms')
+    huaweiImplementation project(':core:core-hms')
 }

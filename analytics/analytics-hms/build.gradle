@@ -31,6 +31,6 @@ android {
 
 dependencies {
     api project(":analytics:analytics-common")
-    implementation project(":core:core-hms")
+    api project(":core:core-hms")
     implementation 'com.huawei.hms:hianalytics:6.1.0.300'
 }

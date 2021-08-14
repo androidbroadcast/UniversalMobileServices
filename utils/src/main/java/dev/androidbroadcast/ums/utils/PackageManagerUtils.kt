@@ -11,6 +11,10 @@ public fun getInstallerPackageName(context: Context): String? {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
         return packageManager.getInstallSourceInfo(context.packageName).initiatingPackageName
     } else {
-        return packageManager.getInstallerPackageName(context.packageName)
+        try {
+            return packageManager.getInstallerPackageName(context.packageName)
+        } catch (e: IllegalArgumentException) {
+            return null
+        }
     }
 }

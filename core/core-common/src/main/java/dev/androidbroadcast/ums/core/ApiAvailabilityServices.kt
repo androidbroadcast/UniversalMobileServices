@@ -7,10 +7,7 @@ import android.content.Context
  */
 public interface ApiAvailabilityServices {
 
-    /**
-     * Unique string that identify implementation of [ApiAvailabilityServices]
-     */
-    public val serviceId: String
+    public val servicesInfo: ServicesInfo
 
     /**
      * Check is services present on device
@@ -19,13 +16,21 @@ public interface ApiAvailabilityServices {
 
     public fun isServicesAvailable(context: Context, minApkVersion: Int): Int
 
-    /**
-     * Package name of store with what the services is connected. As example,
-     * for Google Play Services it will be Google Play with package name 'com.android.vending'.
-     *
-     * Can be null in case when services are independent of any app store.
-     */
-    public val storePackageName: String?
+    public data class ServicesInfo(
+        /**
+         * Unique string that identify implementation of [ApiAvailabilityServices]
+         */
+        public val serviceId: String,
+        /**
+         * Package name of store with what the services is connected. As example,
+         * for Google Play Services it will be Google Play with package name 'com.android.vending'.
+         *
+         * Can be null in case when services are independent of any app store.
+         */
+        public val storePackageName: String?
+    ) {
+        override fun toString(): String = serviceId
+    }
 }
 
 /**
