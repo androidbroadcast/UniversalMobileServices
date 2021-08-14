@@ -7,7 +7,7 @@ import dev.androidbroadcast.ums.core.UmsApiAvailability
 import javax.inject.Scope
 
 @AppScope
-@Component(modules = [MobileServiceModule::class])
+@Component(modules = [MobileServiceModule2::class])
 interface AppComponent {
 
     val apiAvailability: UmsApiAvailability

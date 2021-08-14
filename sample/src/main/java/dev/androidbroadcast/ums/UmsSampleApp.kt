@@ -1,3 +1,5 @@
+@file:Suppress("MemberVisibilityCanBePrivate")
+
 package dev.androidbroadcast.ums
 
 import android.app.Application

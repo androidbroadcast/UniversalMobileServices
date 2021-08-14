@@ -56,11 +56,9 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
     kapt 'com.google.dagger:dagger-compiler:2.38.1'
 
-    googleImplementation project(':push:push-gms')
-    googleImplementation project(':analytics:analytics-gms')
-    googleImplementation project(':core:core-gms')
+    implementation project(':push:push-gms')
+    implementation project(':analytics:analytics-gms')
 
-    huaweiImplementation project(':push:push-hms')
-    huaweiImplementation project(':analytics:analytics-hms')
-    huaweiImplementation project(':core:core-hms')
+    implementation project(':push:push-hms')
+    implementation project(':analytics:analytics-hms')
 }
