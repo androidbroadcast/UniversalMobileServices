@@ -17,7 +17,7 @@ class MobileServiceModule {
         if (!UmsMessagingManager.isInitialized) {
             UmsMessagingManager.initWithDefault(application, APP_ID)
         }
-        return UmsMessagingManager.getInstance()
+        return UmsMessagingManager.instance
     }
 
     @Provides

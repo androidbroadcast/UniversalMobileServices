@@ -12,7 +12,7 @@ public class UmsApiAvailability(internal val context: Context) {
         loadServices<ApiAvailabilityServices>().toList()
     }
 
-    public var currentServicesId: String? = getPreferredServicesId()
+    public var currentServicesId: String? = getRecommendedServiceId()
         private set
 
     public fun getAvailableServices(): List<ApiAvailabilityServices.ServicesInfo> {
@@ -26,20 +26,16 @@ public class UmsApiAvailability(internal val context: Context) {
             .mapKeys { (apiAvailabilityServices, _) -> apiAvailabilityServices.servicesInfo }
     }
 
-    @Suppress("MemberVisibilityCanBePrivate")
-    public fun getPreferredServices(): ApiAvailabilityServices.ServicesInfo? {
+    public fun getRecommendedService(): ApiAvailabilityServices.ServicesInfo? {
         val installerPackageName = getInstallerPackageName(context)
         val apiAvailabilityServices = getAvailableServices()
         if (installerPackageName != null) {
-            return apiAvailabilityServices
+            val servicesInfo = apiAvailabilityServices
                 .find { service -> service.storePackageName == installerPackageName }
+            if (servicesInfo != null) return servicesInfo
         }
 
-        if (apiAvailabilityServices.isNotEmpty()) {
-            return apiAvailabilityServices[0]
-        }
-
-        return null
+        return apiAvailabilityServices.firstOrNull()
     }
 }
 
@@ -47,14 +43,15 @@ public fun UmsApiAvailability.getAvailableServicesIds(): List<String> {
     return getAvailableServices().map { it.serviceId }
 }
 
-public fun UmsApiAvailability.getPreferredServicesId(): String? {
-    return getPreferredServices()?.serviceId
+public fun UmsApiAvailability.getRecommendedServiceId(): String? {
+    return getRecommendedService()?.serviceId
 }
 
-public fun UmsApiAvailability.getPreferredServicesIdOrDefault(defaultServiceId: String): String {
-    return getPreferredServices()?.serviceId ?: defaultServiceId
+public fun UmsApiAvailability.getRecommendedServiceIdOrDefault(defaultServiceId: String): String {
+    return getRecommendedServiceId() ?: defaultServiceId
 }
 
-public fun UmsApiAvailability.getPreferredServicesIdOrFirstAvailable(): ApiAvailabilityServices.ServicesInfo? {
-    return getPreferredServices() ?: getAvailableServices().firstOrNull()
+public fun UmsApiAvailability.getRecommendedServiceIdOrFirstAvailable(
+): ApiAvailabilityServices.ServicesInfo? {
+    return getRecommendedService() ?: getAvailableServices().firstOrNull()
 }

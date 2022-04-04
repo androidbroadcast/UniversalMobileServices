@@ -116,10 +116,12 @@ public class UmsMessagingManager private constructor(private val service: PushMe
     public companion object {
 
         @Suppress("ObjectPropertyName")
-        @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
-        @get:JvmName("instance")
-        public var _instance: UmsMessagingManager? = null
-            private set
+        @get:RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
+        public val instance: UmsMessagingManager
+            get() = checkNotNull(_instance)
+
+        @Suppress("ObjectPropertyName")
+        private var _instance: UmsMessagingManager? = null
 
         public fun init(service: PushMessagingService) {
             if (_instance != null) {
@@ -133,7 +135,7 @@ public class UmsMessagingManager private constructor(private val service: PushMe
             context: Context,
             appId: String? = null,
             tokenScope: String? = null
-        ) {
+        ):UmsMessagingManager {
             val serviceLoader: ServiceLoader<PushMessagingServiceFactory> = loadServices()
             val currentServices = UmsApiAvailability(context).currentServicesId
             val pushMessagingServiceFactory = checkNotNull(
@@ -141,15 +143,13 @@ public class UmsMessagingManager private constructor(private val service: PushMe
             ) {
                 "Not push messaging services for services '$currentServices'"
             }
-            _instance =
+            val umsMessagingManager =
                 UmsMessagingManager(pushMessagingServiceFactory.create(context, appId, tokenScope))
+            _instance = umsMessagingManager
+            return umsMessagingManager
         }
 
         public val isInitialized: Boolean
             get() = _instance != null
-
-        public fun getInstance(): UmsMessagingManager {
-            return checkNotNull(_instance) { "UmsMessagingManager isn't initialized" }
-        }
     }
 }

@@ -12,8 +12,4 @@ Supported services:
 | Push Messages | [Firebase Cloud Messages](https://firebase.google.com/docs/cloud-messaging)| [Push Kit](https://developer.huawei.com/consumer/en/hms/huawei-pushkit/) |
 | Analytics | [Google Analytics](https://firebase.google.com/docs/analytics) | [Analytics Kit](https://developer.huawei.com/consumer/en/hms/huawei-analyticskit/) |
 | Remote Config | - | - |
-| In-App Purchases | - | - |
-| Maps | - | - |
-| Location | - | - |
-| Auth | - | - |
 | Core | - | - |

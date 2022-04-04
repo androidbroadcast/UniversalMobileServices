@@ -4,7 +4,7 @@ package dev.androidbroadcast.ums
 
 import android.app.Application
 import android.util.Log
-import dev.androidbroadcast.ums.core.getPreferredServicesIdOrFirstAvailable
+import dev.androidbroadcast.ums.core.getRecommendedServiceIdOrFirstAvailable
 import dev.androidbroadcast.ums.di.AppComponent
 import dev.androidbroadcast.ums.di.DaggerAppComponent
 
@@ -21,7 +21,7 @@ class UmsSampleApp : Application() {
         val apiAvailability = appComponent.apiAvailability
         val availableServices = apiAvailability.getAvailableServices()
         Log.d(TAG, "availableServices=$availableServices")
-        val preferredServices = apiAvailability.getPreferredServicesIdOrFirstAvailable()
+        val preferredServices = apiAvailability.getRecommendedServiceIdOrFirstAvailable()
         Log.d(TAG, "preferredServices=$preferredServices")
         val analytics = appComponent.analytics
         Log.d(TAG, "analytics=$analytics")
