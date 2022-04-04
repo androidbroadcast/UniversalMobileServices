@@ -11,7 +11,9 @@ dependencyResolutionManagement {
 rootProject.name = "Universal Mobile Services"
 
 include ':sample'
+include ':remote-config:remote-config-common', ':remote-config:remote-config-gms', ':remote-config:remote-config-hms'
 include ':push:push-common', ':push:push-gms', ':push:push-hms'
 include ':analytics:analytics-common', ':analytics:analytics-hms', ':analytics:analytics-gms'
 include ':core:core-common', ':core:core-gms', ':core:core-hms'
 include ':utils'
+include ':hms-base-ktx'

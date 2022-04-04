@@ -11,5 +11,5 @@ Supported services:
 |-|-|-|
 | Push Messages | [Firebase Cloud Messages](https://firebase.google.com/docs/cloud-messaging)| [Push Kit](https://developer.huawei.com/consumer/en/hms/huawei-pushkit/) |
 | Analytics | [Google Analytics](https://firebase.google.com/docs/analytics) | [Analytics Kit](https://developer.huawei.com/consumer/en/hms/huawei-analyticskit/) |
-| Remote Config | - | - |
+| Remote Config | [Firebase Remote Config](https://firebase.google.com/docs/remote-config) | [HMS Remote Config](https://developer.huawei.com/consumer/en/doc/development/AppGallery-connect-Guides/agc-remoteconfig-introduction-0000001055149778) |
 | Core | - | - |

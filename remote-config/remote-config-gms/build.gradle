@@ -20,7 +20,6 @@ android {
             minifyEnabled false
         }
     }
-
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -32,8 +31,11 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.annotation:annotation:1.3.0'
-    api 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1'
-    api project(':core:core-common')
-    implementation project(':utils')
+    api project(":remote-config:remote-config-common")
+    api project(":core:core-gms")
+
+    implementation platform('com.google.firebase:firebase-bom:28.3.0')
+    implementation 'com.google.firebase:firebase-config'
+    implementation 'com.google.firebase:firebase-analytics'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.4.1'
 }

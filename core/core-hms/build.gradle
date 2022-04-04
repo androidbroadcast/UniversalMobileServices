@@ -31,5 +31,5 @@ android {
 
 dependencies {
     implementation project(':core:core-common')
-    implementation 'com.huawei.hms:base:6.0.0.300'
+    api project(':hms-base-ktx')
 }
